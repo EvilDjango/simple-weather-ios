@@ -67,7 +67,6 @@ class CityMapper {
         "桂林": "Guilin",
         "汕头": "Shantou",
         "三亚": "Sanya",
-        "拉萨": "Lhasa",
 
         // 国际城市（常见）
         "伦敦": "London",
