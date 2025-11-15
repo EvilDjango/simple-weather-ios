@@ -16,17 +16,34 @@ struct ContentView: View {
             VStack(spacing: 20) {
                 // 搜索框
                 HStack {
-                    TextField("输入城市名称（支持中英文）", text: $cityName)
+                    TextField("搜索城市（支持中英文）", text: $cityName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.none)
+                        .submitLabel(.search)
+                        .onSubmit {
+                            Task {
+                                await viewModel.searchWeather(for: cityName)
+                            }
+                        }
 
-                    Button("搜索") {
+                    Button(action: {
                         Task {
                             await viewModel.searchWeather(for: cityName)
                         }
+                    }) {
+                        Image(systemName: "magnifyingglass")
                     }
                     .buttonStyle(.borderedProminent)
                     .disabled(cityName.isEmpty)
+
+                    Button(action: {
+                        Task {
+                            await viewModel.fetchWeatherForCurrentLocation()
+                        }
+                    }) {
+                        Image(systemName: "location.fill")
+                    }
+                    .buttonStyle(.bordered)
                 }
                 .padding()
 
