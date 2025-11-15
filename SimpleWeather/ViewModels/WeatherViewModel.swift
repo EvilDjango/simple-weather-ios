@@ -16,13 +16,17 @@ class WeatherViewModel: ObservableObject {
         errorMessage = nil
         isLoading = true
 
+        // 转换城市名（中文 -> 英文）
+        let convertedCity = CityMapper.convert(cityName: city)
+        print("🏙️ 输入城市: \(city) -> 转换后: \(convertedCity)")
+
         do {
             // 调用网络服务
-            let response = try await weatherService.fetchWeather(for: city)
+            let response = try await weatherService.fetchWeather(for: convertedCity)
             // 转换为显示模型
             weather = WeatherDisplay(from: response)
         } catch NetworkError.cityNotFound {
-            errorMessage = "城市未找到，请使用英文城市名（如：Beijing, Shanghai, London）"
+            errorMessage = "城市未找到，请检查城市名称拼写是否正确"
             weather = nil
         } catch NetworkError.apiError(let message) {
             errorMessage = "API错误：\(message)"

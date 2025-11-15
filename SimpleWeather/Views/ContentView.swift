@@ -16,7 +16,7 @@ struct ContentView: View {
             VStack(spacing: 20) {
                 // 搜索框
                 HStack {
-                    TextField("输入城市名称", text: $cityName)
+                    TextField("输入城市名称（支持中英文）", text: $cityName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.none)
 
