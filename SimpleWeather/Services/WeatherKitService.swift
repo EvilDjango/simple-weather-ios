@@ -66,9 +66,3 @@ class WeatherKitService {
         return location
     }
 }
-
-// 错误类型
-enum WeatherKitError: Error {
-    case cityNotFound
-    case locationUnavailable
-}
